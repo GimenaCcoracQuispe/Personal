@@ -53,4 +53,4 @@ jobs:
 
       - name: Print environment variables for debugging
         run: |
-          echo "Database URL: ${{ secrets.DATABASE_URL }}"
+          run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=GimenaCcoracQuispe_Personal
