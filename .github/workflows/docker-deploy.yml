@@ -20,7 +20,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Make mvnw executable
-        run: chmod +x mvnw  # Cambia los permisos del script mvnw
+        run: chmod +x mvnw
 
       - name: Build JAR
         run: ./mvnw clean package  
@@ -32,7 +32,15 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build . -t gimenac/microservicio_traductor:latest  # Reemplaza con tu nombre de usuario real
+        run: docker build . -t gimenac/microservicio_traductor:latest
+
+      - name: Run Docker container
+        run: |
+          docker run -e DATABASE_URL=${{ secrets.DATABASE_URL }} \
+                     -e DATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }} \
+                     -e DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }} \
+                     -p 8085:8085 \
+                     gimenac/microservicio_traductor:latest
 
       - name: Push Docker image
-        run: docker push gimenac/microservicio_traductor:latest  # Reemplaza con tu nombre de usuario real
+        run: docker push gimenac/microservicio_traductor:latest
