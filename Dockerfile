@@ -10,5 +10,10 @@ EXPOSE 8085
 # Agrega el archivo JAR de tu aplicación al directorio de trabajo en el contenedor
 ADD ./target/traductor-0.0.1-SNAPSHOT.jar app.jar
 
+# Configura las variables de entorno
+ENV DATABASE_URL=${DATABASE_URL}
+ENV DATABASE_USERNAME=${DATABASE_USERNAME}
+ENV DATABASE_PASSWORD=${DATABASE_PASSWORD}
+
 # Define el punto de entrada para ejecutar la aplicación Java
 ENTRYPOINT ["java", "-jar", "app.jar"]
