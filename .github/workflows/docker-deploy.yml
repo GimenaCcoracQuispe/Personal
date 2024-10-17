@@ -3,10 +3,10 @@ name: Docker
 on:
   push:
     branches:
-      - develop-spring
+      - develop
   pull_request:
     branches:
-      - develop-spring
+      - develop
 
 jobs:
   build:
